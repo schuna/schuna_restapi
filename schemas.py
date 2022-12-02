@@ -32,7 +32,20 @@ class TagSchema(PlainTagSchema):
     store = fields.Nested(PlainStoreSchema(), dump_only=True)
 
 
+# noinspection PyTypeChecker
+class TagAndItemSchema(Schema):
+    message = fields.Str()
+    item = fields.Nested(ItemSchema)
+    tag = fields.Nested(TagSchema)
+
+
 class ItemUpdateSchema(Schema):
     name = fields.Str()
     price = fields.Float()
     store_id = fields.Int()
+
+
+class UserSchema(Schema):
+    id = fields.Int(dump_only=True)
+    username = fields.Str(required=True)
+    password = fields.Str(required=True, load_only=True)
