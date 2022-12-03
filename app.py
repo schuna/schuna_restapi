@@ -3,6 +3,7 @@ import os
 from flask import Flask, jsonify
 from flask_jwt_extended import JWTManager
 from flask_smorest import Api
+from flask_migrate import Migrate
 
 from db import db
 from blocklist import BLOCKLIST
@@ -28,7 +29,7 @@ def create_app(db_url=None):
     app.config["SQLALCHEMY_DATABASE_URI"] = db_url or os.getenv("DATABASE_URL", "sqlite:///data.db")
     app.config["SQLALCHEMY_TRACK_MODIFICATION"] = False
     db.init_app(app)
-
+    migrate = Migrate(app, db)
     api = Api(app)
     app.config["JWT_SECRET_KEY"] = "lucky!"
     jwt = JWTManager(app)
@@ -95,9 +96,6 @@ def create_app(db_url=None):
                            "error": "authorization_required",
                        })
                ), 401
-
-    with app.app_context():
-        db.create_all()
 
     api.register_blueprint(ItemBlueprint)
     api.register_blueprint(StoreBlueprint)
