@@ -1,9 +1,14 @@
-from db import db
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import relationship
+
+from database import Base
 
 
-class UserModel(db.Model):
+class User(Base):
     __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(80), unique=True, nullable=False)
-    password = db.Column(db.String(256), nullable=False)
+    id = Column(Integer, primary_key=True, index=True)
+    username = Column(String(80), unique=True)
+    email = Column(String(80), unique=True)
+    password = Column(String(80))
+    posts = relationship("Post", cascade="all, delete", back_populates='user', lazy='joined')
+    inbodies = relationship("InBody", cascade="all, delete", back_populates="user", lazy="joined")

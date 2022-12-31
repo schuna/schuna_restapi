@@ -1,5 +1,5 @@
 #!/bin/sh
 
-flask db upgrade
+alembic upgrade head
 
-exec gunicorn --bind 0.0.0.0:80 "app:create_app()"
+exec uvicorn main:app --reload --host 0.0.0.0 --port 80

@@ -1,4 +1,10 @@
-### Docker build & run
+# schuna_fastapi
 
-> docker build -t restapi-flask-python . <br>
-> docker run -dp 80:80 --name flask-restapi -w /app -v ${PWD}:/app restapi-flask-python 
+# alembic migration
+alembic init migrations
+alembic revision --autogenerate -m "Initial"
+alembic upgrade head
+
+# docker
+- docker build -t fastapi-schuna .
+- docker run -dp 80:80 --name fastapi-schuna -w /app -v %cd%:/app fastapi-schuna
