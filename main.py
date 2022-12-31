@@ -1,16 +1,13 @@
-import os
-
+from dotenv import load_dotenv
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 
-import endpoints.inbody as inbody_endpoints
-import endpoints.comment as comment_endpoints
 import endpoints.authentication as auth_endpoints
+import endpoints.comment as comment_endpoints
+import endpoints.inbody as inbody_endpoints
 import endpoints.post as post_endpoints
 import endpoints.user as user_endpoints
 from container import Container
-from dotenv import load_dotenv
 
 load_dotenv()
 container = Container()
@@ -37,6 +34,4 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=['*']
 )
-app.mount('/images',
-          StaticFiles(directory=os.path.join(os.getcwd(), "images")),
-          name="images")
+
