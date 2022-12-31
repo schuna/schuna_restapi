@@ -1,9 +1,9 @@
 # schuna_fastapi
 
 # alembic migration
-alembic init migrations
-alembic revision --autogenerate -m "Initial"
-alembic upgrade head
+- alembic init migrations
+- alembic revision --autogenerate -m "Initial"
+- alembic upgrade head
 
 # docker
 - docker build -t fastapi-schuna .

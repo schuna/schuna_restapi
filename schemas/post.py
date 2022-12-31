@@ -16,7 +16,6 @@ class User(BaseModel):
 
 class PostBase(BaseModel):
     image_url: str
-    image_url_type: str
     caption: str
     user_id: int
     timestamp: Optional[datetime] = datetime.now()
@@ -25,7 +24,6 @@ class PostBase(BaseModel):
 class PostDisplay(BaseModel):
     id: int
     image_url: str
-    image_url_type: str
     caption: str
     user: User
     timestamp: datetime

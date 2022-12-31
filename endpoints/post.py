@@ -14,18 +14,12 @@ router = APIRouter(
     tags=["post"]
 )
 
-image_url_types = ["absolute", "relative"]
-
 
 @router.post('/', response_model=PostDisplay)
 @inject
 def create_post(request: PostBase,
                 post_service: PostService = Depends(Provide[Container.post_service]),
                 current_user: UserBase = Depends(get_current_user)):
-    if request.image_url_type not in image_url_types:
-        raise HTTPException(status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-                            detail="Parameter image_url_type can only take values 'absolute' or 'relative'")
-
     response = post_service.create_post(request)
     if response.success:
         return response.data

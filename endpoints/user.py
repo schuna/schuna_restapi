@@ -16,7 +16,8 @@ router = APIRouter(
 @router.post('/', response_model=UserDisplay)
 @inject
 def create_user(request: UserBase,
-                user_service: UserService = Depends(Provide[Container.user_service])):
+                user_service: UserService = Depends(Provide[Container.user_service]),
+                current_user: UserBase = Depends(get_current_user)):
     request.password = Hash.bcrypt(request.password)
     response = user_service.create_user(request)
     if response.success:

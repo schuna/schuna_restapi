@@ -6,7 +6,6 @@ from pydantic import BaseModel
 
 class Post(BaseModel):
     image_url: str
-    image_url_type: str
     caption: str
     timestamp: datetime
 
