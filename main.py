@@ -24,7 +24,8 @@ app.include_router(post_endpoints.router)
 
 origins = [
     'http://localhost:3000',
-    'http://localhost:3001'
+    'http://localhost:3001',
+    'https://schuna-react.onrender.com'
 ]
 
 app.add_middleware(
